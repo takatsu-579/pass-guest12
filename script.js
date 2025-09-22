@@ -11,19 +11,20 @@ document.addEventListener('DOMContentLoaded', () => {
         messageDiv.classList.add(isUser ? 'user-message' : 'ai-message');
         messageDiv.innerHTML = `<p>${text}</p>`;
         messagesContainer.appendChild(messageDiv);
-        // 新しいメッセージが追加されたら、自動的にスクロールする
+
+        // 新しいメッセージが追加されたら、自動的にスクロール
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
 
     // ユーザーからの入力を処理する関数
     function handleUserInput() {
-        const userText = userInput.value.trim().toLowerCase(); // 入力を小文字に変換
-        if (!userText) return; // 空のメッセージは送信しない
+        const userText = userInput.value.trim().toLowerCase();
+        if (!userText) return;
 
-        addMessage(userText, true); // ユーザーのメッセージを表示
-        userInput.value = ''; // 入力欄をクリア
+        addMessage(userText, true); // ユーザーのメッセージを追加
+        userInput.value = '';       // 入力欄クリア
 
-        // AIからの返信をシミュレート
+        // AIの返信をシミュレート
         setTimeout(() => {
             let aiResponse = "ごめんなさい、よくわかりません。";
             
@@ -38,18 +39,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else if (userText.includes("figma")) {
                 aiResponse = "正解です！おめでとう！君はパスワードを思い出した！";
-                // ここに次のページへの誘導や、クリアメッセージを追加できます
+                // ここで次のページへの誘導やクリア演出を追加可能
             } else {
                 aiResponse = "それはパスワードではないようです。もう少し考えてみましょう。";
             }
             addMessage(aiResponse, false);
-        }, 500); // 応答の遅延
+        }, 500);
     }
 
     // 送信ボタンのクリックイベント
     sendBtn.addEventListener('click', handleUserInput);
 
-    // Enterキーの入力イベント
+    // Enterキーで送信
     userInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             handleUserInput();
