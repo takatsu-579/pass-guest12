@@ -12,16 +12,18 @@ body {
 .chat-wrapper {
     width: 100%;
     max-width: 600px;
-    height: 100dvh; /* ←常に画面いっぱい */
+    height: 100dvh; /* 画面いっぱい */
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
+    border-radius: 0;      /* 角丸を無効化 */
+    box-shadow: none;      /* シャドウを消去 */
 }
 
 .messages {
     flex: 1;
     overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* iOS用スムーズスクロール */
+    -webkit-overflow-scrolling: touch; /* iOSスムーズスクロール */
     padding: 10px;
     display: flex;
     flex-direction: column;
