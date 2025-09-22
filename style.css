@@ -9,29 +9,24 @@ body {
     min-height: 100vh;
 }
 
-/* chat-wrapperの修正 */
 .chat-wrapper {
     width: 100%;
     max-width: 600px;
-    height: 80vh; /* 高さを80%に固定 */
+    height: 80vh; /* 高さの基準を固定 */
     min-height: 400px;
-    max-height: 80vh;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    /* overflowは削除 */
 }
 
-/* messagesの修正 */
 .messages {
-    flex-grow: 1; /* 親要素の残りのスペースを全て使う */
-    overflow-y: auto; /* ここでスクロールを有効にする */
+    flex-grow: 1;
+    overflow-y: auto; /* ★ここが重要：メッセージが増えたらスクロール */
     padding: 20px;
     display: flex;
     flex-direction: column;
-    /* height: calc(100% - 1px); は削除 */
 }
 
 .message {
@@ -40,21 +35,21 @@ body {
     margin-bottom: 15px;
     max-width: 80%;
     line-height: 1.4;
-    word-wrap: break-word; /* 長い単語でも折り返す */
+    word-wrap: break-word;
 }
 
 .user-message {
     background-color: #007bff;
     color: #ffffff;
-    align-self: flex-end; /* 右寄せ */
-    border-bottom-right-radius: 4px; /* 角を少し丸める */
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
 }
 
 .ai-message {
     background-color: #e9e9eb;
     color: #333;
-    align-self: flex-start; /* 左寄せ */
-    border-bottom-left-radius: 4px; /* 角を少し丸める */
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
 }
 
 .input-container {
