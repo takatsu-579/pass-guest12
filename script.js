@@ -2,32 +2,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
     const messagesContainer = document.getElementById('messages');
-    let hintCount = 0; // ヒントの回数を管理する変数
+    let hintCount = 0;
 
-    // メッセージをチャットに表示する関数
+    // 保存用配列（localStorageから復元）
+    let chatHistory = JSON.parse(localStorage.getItem("chatHistory") || "[]");
+
+    // ページ読み込み時に復元
+    chatHistory.forEach(item => addMessage(item.text, item.isUser));
+
+    // メッセージをチャットに表示
     function addMessage(text, isUser) {
         const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message');
-        messageDiv.classList.add(isUser ? 'user-message' : 'ai-message');
+        messageDiv.classList.add('message', isUser ? 'user-message' : 'ai-message');
         messageDiv.innerHTML = `<p>${text}</p>`;
         messagesContainer.appendChild(messageDiv);
-
-        // 新しいメッセージが追加されたら、自動的にスクロール
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        // 履歴に追加して localStorage に保存
+        chatHistory.push({ text, isUser });
+        localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
     }
 
-    // ユーザーからの入力を処理する関数
+    // ユーザー入力処理
     function handleUserInput() {
         const userText = userInput.value.trim().toLowerCase();
         if (!userText) return;
 
-        addMessage(userText, true); // ユーザーのメッセージを追加
-        userInput.value = '';       // 入力欄クリア
+        addMessage(userText, true);
+        userInput.value = '';
 
-        // AIの返信をシミュレート
+        // AI返信シミュレーション
         setTimeout(() => {
             let aiResponse = "ごめんなさい、よくわかりません。";
-            
+
             if (userText.includes("ヒント")) {
                 hintCount++;
                 if (hintCount === 1) {
@@ -39,21 +46,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else if (userText.includes("figma")) {
                 aiResponse = "正解です！おめでとう！君はパスワードを思い出した！";
-                // ここで次のページへの誘導やクリア演出を追加可能
+                // 次のページへの誘導や演出はここに追加可能
             } else {
                 aiResponse = "それはパスワードではないようです。もう少し考えてみましょう。";
             }
+
             addMessage(aiResponse, false);
         }, 500);
     }
 
-    // 送信ボタンのクリックイベント
+    // イベント設定
     sendBtn.addEventListener('click', handleUserInput);
-
-    // Enterキーで送信
     userInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            handleUserInput();
-        }
+        if (event.key === 'Enter') handleUserInput();
     });
 });
