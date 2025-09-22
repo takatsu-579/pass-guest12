@@ -24,11 +24,13 @@ body {
 }
 
 .messages {
-    flex-grow: 1;
-    overflow-y: auto; /* ここでスクロールを有効にする */
+   flex-grow: 1;
+    overflow-y: auto;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    /* ★追加 */
+    height: calc(100% - 1px); /* 親要素の高さを基準に、メッセージエリアの高さを確保 */
 }
 
 .message {
