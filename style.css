@@ -9,10 +9,11 @@ body {
     min-height: 100vh;
 }
 
+/* chat-wrapperの修正 */
 .chat-wrapper {
-  width: 100%;
+    width: 100%;
     max-width: 600px;
-    height: 80vh;
+    height: 80vh; /* 高さを80%に固定 */
     min-height: 400px;
     max-height: 80vh;
     background-color: #ffffff;
@@ -20,17 +21,17 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* ★追加 */
+    /* overflowは削除 */
 }
 
+/* messagesの修正 */
 .messages {
-   flex-grow: 1;
-    overflow-y: auto;
+    flex-grow: 1; /* 親要素の残りのスペースを全て使う */
+    overflow-y: auto; /* ここでスクロールを有効にする */
     padding: 20px;
     display: flex;
     flex-direction: column;
-    /* ★追加 */
-    height: calc(100% - 1px); /* 親要素の高さを基準に、メッセージエリアの高さを確保 */
+    /* height: calc(100% - 1px); は削除 */
 }
 
 .message {
